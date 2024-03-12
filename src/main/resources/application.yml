@@ -1,0 +1,28 @@
+server:
+  port: 8081
+
+logging:
+  level:
+    ROOT: INFO
+
+spring:
+  flyway:
+    url: jdbc:postgresql://localhost:${DB_PORT:5432}/postgres
+    schemas: test
+    user: ${DB_USER:postgres}
+    password: ${DB_PASS:postgres}
+  datasource:
+    url: jdbc:postgresql://localhost:${DB_PORT:5432}/postgres?currentSchema=test
+    username: ${DB_USER:postgres}
+    password: ${DB_PASS:postgres}
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+        use_sql_comments: true
+        naming:
+          physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    hibernate:
+      ddl-auto: none
+
