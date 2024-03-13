@@ -3,7 +3,8 @@ package com.example.product_price.service;
 import com.example.product_price.model.dto.PriceDto;
 import com.example.product_price.model.entity.Price;
 import com.example.product_price.repository.PriceRepository;
-import lombok.RequiredArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
@@ -17,11 +18,11 @@ import java.util.stream.Collectors;
  */
 @Service
 @Slf4j
-@RequiredArgsConstructor
+@AllArgsConstructor
+@NoArgsConstructor
 public class PriceService {
 
-
-    private final PriceRepository repository;
+    private PriceRepository repository;
 
 
     /**

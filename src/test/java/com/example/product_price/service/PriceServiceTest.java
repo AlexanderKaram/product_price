@@ -2,32 +2,37 @@ package com.example.product_price.service;
 
 import com.example.product_price.model.entity.Price;
 import com.example.product_price.model.entity.PriceMetaData;
-import com.example.product_price.repository.PriceRepository;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class PriceServiceTest {
 
+    private PriceService priceService;
 
-    private PriceRepository repository;
+
+    @BeforeEach
+    void prepare() {
+        this.priceService = new PriceService();
+
+    }
 
 
     @Test
     public void testUnionOfDate_MergePriceList() {
 
-        PriceService priceService = new PriceService(repository);
-
-        // Создаем тестовые данные
         List<Price> existingPrices = new ArrayList<>();
-        existingPrices.add(new Price(1L, new PriceMetaData("122856", 1, 1), 11000, LocalDateTime.of(2013, 1, 1, 0, 0), LocalDateTime.of(2013, 1, 31, 23, 59)));
+        existingPrices.add(new Price(1L, new PriceMetaData("122856", 1, 1),
+                11000, LocalDateTime.of(2013, 1, 1, 0, 0), LocalDateTime.of(2013, 1, 31, 23, 59)));
 
         List<Price> newPrices = new ArrayList<>();
-        newPrices.add(new Price(2L, new PriceMetaData("122856", 1, 1), 11000, LocalDateTime.of(2013, 1, 20, 0, 0), LocalDateTime.of(2013, 2, 20, 23, 59)));
+        newPrices.add(new Price(2L, new PriceMetaData("122856", 1, 1),
+                11000, LocalDateTime.of(2013, 1, 20, 0, 0), LocalDateTime.of(2013, 2, 20, 23, 59)));
 
         List<Price> mergedPrices = priceService.mergePriceList(newPrices, existingPrices);
 
@@ -37,9 +42,6 @@ class PriceServiceTest {
 
     @Test
     public void testBreakingOfDate_MergePriceList() {
-
-
-        PriceService priceService = new PriceService(repository);
 
         List<Price> existingPrices = new ArrayList<>();
         existingPrices.add(new Price(1L, new PriceMetaData("6654", 1, 2), 99000, LocalDateTime.of(2013, 1, 1, 0, 0), LocalDateTime.of(2013, 1, 31, 23, 59)));
