@@ -24,7 +24,6 @@ public class PriceService {
 
     private PriceRepository repository;
 
-
     /**
      * Обновление цен
      */
